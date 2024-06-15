@@ -14,9 +14,9 @@ export default function Guesses() {
         <div
           key={guess.index}
           className={`bg-white py-2 px-4 rounded-md text-center border-black ${
-            guess.status === "higher" ? `bg-red-500` : ``
-          } ${guess.status === "lower" ? `bg-yellow-500` : ``} ${
-            guess.status === "correct" ? `bg-green-500` : ``
+            guess.status === "higher" ? `!bg-red-500` : ``
+          } ${guess.status === "lower" ? `!bg-yellow-500` : ``} ${
+            guess.status === "correct" ? `!bg-green-500` : ``
           }`}
         >
           {guess.value} {guess.status === "higher" && <>⬆️</>}
