@@ -10,7 +10,18 @@ const config: Config = {
     fontFamily: {
       sans: ["var(--font-nunito)", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        black: "#000",
+        white: "#fff",
+        gray: "#efefef",
+        blue: "#4198ff",
+        "dark-blue": "#0067e0",
+        green: "#28c32b",
+        red: "#ff4141",
+        orange: "#ffa841",
+      },
+    },
   },
   plugins: [],
 };

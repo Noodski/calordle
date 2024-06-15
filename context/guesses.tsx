@@ -1,8 +1,10 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 
+export type Status = "higher" | "lower" | "correct";
+
 interface GuessShared {
   value: number;
-  status: "higher" | "lower" | "correct";
+  status: Status;
 }
 
 interface Guess extends GuessShared {
@@ -16,7 +18,7 @@ interface Action extends GuessShared {
 const GuessesContext = createContext<Guess[] | null>(null);
 
 const GuessesDispatchContext = createContext<((action: Action) => void) | null>(
-  null
+  null,
 );
 
 interface GuessesProviderProps {

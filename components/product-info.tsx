@@ -1,8 +1,8 @@
 export default function ProductInfo() {
   return (
     <>
-      <div className="max-w-[300px] aspect-square w-full bg-black"></div>
-      <h2 className="text-2xl font-bold">Apple</h2>
+      <div className="aspect-square w-full bg-black"></div>
+      <h2 className="text-[24px] font-bold">Apple</h2>
     </>
   );
 }

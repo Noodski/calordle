@@ -1,6 +1,6 @@
 "use client";
 
-import { useGuesses, useGuessesDispatch } from "@/context/guesses";
+import { type Status, useGuesses, useGuessesDispatch } from "@/context/guesses";
 
 export default function Guesses() {
   const guesses = useGuesses();
@@ -8,20 +8,52 @@ export default function Guesses() {
 
   if (!guesses?.length) return null;
 
+  const getBgColor = (status: Status): string => {
+    switch (status) {
+      case "higher":
+        return "bg-red";
+      case "lower":
+        return "bg-orange";
+      case "correct":
+        return "bg-green";
+    }
+  };
+
+  const getTextColor = (status: Status): string => {
+    switch (status) {
+      case "higher":
+        return "text-red";
+      case "lower":
+        return "text-orange";
+      case "correct":
+        return "text-green";
+    }
+  };
+
+  const getIcon = (status: Status): string => {
+    switch (status) {
+      case "higher":
+        return "↑";
+      case "lower":
+        return "↓";
+      case "correct":
+        return "✓";
+    }
+  };
+
   return (
     <div className="flex flex-col gap-y-2">
       {guesses.map((guess) => (
         <div
           key={guess.index}
-          className={`bg-white py-2 px-4 rounded-md text-center border-black ${
-            guess.status === "higher" ? `!bg-red-500` : ``
-          } ${guess.status === "lower" ? `!bg-yellow-500` : ``} ${
-            guess.status === "correct" ? `!bg-green-500` : ``
-          }`}
+          className={`flex items-center justify-between gap-2 rounded-md px-4 py-2 text-center text-[18px] font-bold text-white ${getBgColor(guess.status)}`}
         >
-          {guess.value} {guess.status === "higher" && <>⬆️</>}
-          {guess.status === "lower" && <>⬇️</>}
-          {guess.status === "correct" && <>✔️</>}
+          <span>{guess.value}</span>
+          <div
+            className={`flex h-6 w-6 items-center justify-center rounded-full bg-white text-center ${getTextColor(guess.status)}`}
+          >
+            {getIcon(guess.status)}
+          </div>
         </div>
       ))}
     </div>

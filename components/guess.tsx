@@ -3,6 +3,7 @@
 import { useGuesses, useGuessesDispatch } from "@/context/guesses";
 import { useProgress, useProgressDispatch } from "@/context/progress";
 import { useState, ChangeEvent, MouseEvent } from "react";
+import Button from "./button";
 
 export default function Guess({ correctGuess }: { correctGuess: number }) {
   const [value, setValue] = useState<string>("");
@@ -29,8 +30,8 @@ export default function Guess({ correctGuess }: { correctGuess: number }) {
         guess > correctGuess
           ? "lower"
           : guess < correctGuess
-          ? "higher"
-          : "correct",
+            ? "higher"
+            : "correct",
     });
 
     if (guess === correctGuess) {
@@ -49,20 +50,15 @@ export default function Guess({ correctGuess }: { correctGuess: number }) {
   if (progress === "success" || progress === "fail") return null;
 
   return (
-    <form className="flex gap-x-4">
+    <form className="flex w-full gap-x-4">
       <input
         type="number"
-        className="bg-white py-2 px-4 shadow-[0_0_4px_rgba(0,0,0,.25)] rounded-md"
-        placeholder="Enter calorie guess"
+        className="w-full rounded-md bg-gray px-4 py-2 text-[18px] font-bold"
+        placeholder="Calorie guess"
         value={value}
         onChange={handleInputChange}
       />
-      <button
-        className="bg-blue-500 text-white py-2 px-4 rounded-md"
-        onClick={handleSubmit}
-      >
-        Submit
-      </button>
+      <Button onClick={handleSubmit}>Submit</Button>
     </form>
   );
 }

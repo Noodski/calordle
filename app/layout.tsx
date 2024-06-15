@@ -4,7 +4,7 @@ import "@/styles/style.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Providers from "@/components/providers";
-import Container from "@/components/container";
+import Main from "@/components/main";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -23,14 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunito.variable}`}>
-      <body>
+    <html lang="en" className={`${nunito.variable} flex min-h-full flex-col`}>
+      <body className="flex grow flex-col">
         <Providers>
-          <Container>
-            <Header />
-            {children}
-            <Footer />
-          </Container>
+          <Header />
+          <Main>{children}</Main>
+          <Footer />
         </Providers>
       </body>
     </html>
