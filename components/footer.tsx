@@ -2,7 +2,7 @@ import Github from "./github";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-between gap-x-8 gap-y-4 bg-gray px-8 py-4 sm:flex-row">
+    <footer className="flex flex-col items-center justify-between gap-x-8 gap-y-4 bg-gray px-8 py-4 text-center text-[14px] sm:flex-row sm:text-left">
       <div>
         <p>
           Created by Cory Horne &{" "}
