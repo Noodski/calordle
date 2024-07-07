@@ -50,7 +50,7 @@ export default function Guess({ correctGuess }: { correctGuess: number }) {
   if (progress === "success" || progress === "fail") return null;
 
   return (
-    <form className="flex w-full gap-x-4">
+    <form className="flex w-full flex-col gap-4 sm:flex-row">
       <input
         type="number"
         className="w-full rounded-md bg-gray px-4 py-2 text-[18px] font-bold"
