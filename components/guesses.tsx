@@ -11,9 +11,9 @@ export default function Guesses() {
   const getBgColor = (status: Status): string => {
     switch (status) {
       case "higher":
-        return "bg-red";
-      case "lower":
         return "bg-orange";
+      case "lower":
+        return "bg-red";
       case "correct":
         return "bg-green";
     }
@@ -22,9 +22,9 @@ export default function Guesses() {
   const getTextColor = (status: Status): string => {
     switch (status) {
       case "higher":
-        return "text-red";
-      case "lower":
         return "text-orange";
+      case "lower":
+        return "text-red";
       case "correct":
         return "text-green";
     }
