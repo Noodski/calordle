@@ -5,7 +5,11 @@ export default function Footer() {
     <footer className="flex flex-col items-center justify-between gap-x-8 gap-y-4 bg-gray px-8 py-4 text-center text-[14px] sm:flex-row sm:text-left">
       <div>
         <p>
-          Created by Cory Horne &{" "}
+          Created by{" "}
+          <a href="https://github.com/Noodski" target="_blank">
+            Cory Horne
+          </a>{" "}
+          &{" "}
           <a href="https://blakejones.dev" target="_blank">
             Blake Jones
           </a>
