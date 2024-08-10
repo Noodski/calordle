@@ -5,7 +5,7 @@ import { useProgress, useProgressDispatch } from "@/context/progress";
 import { useState, ChangeEvent, MouseEvent } from "react";
 import Button from "./button";
 
-export default function Guess({ correctGuess }: { correctGuess: number }) {
+export default function Guess() {
   const [value, setValue] = useState<string>("");
   const guesses = useGuesses();
   const dispatchGuess = useGuessesDispatch();
@@ -23,7 +23,7 @@ export default function Guess({ correctGuess }: { correctGuess: number }) {
 
     let guess = Number(value);
 
-    dispatchGuess?.({
+    /* dispatchGuess?.({
       type: "added",
       value: guess,
       status:
@@ -44,7 +44,7 @@ export default function Guess({ correctGuess }: { correctGuess: number }) {
         type: "changed",
         value: "fail",
       });
-    }
+    } */
   };
 
   if (progress === "success" || progress === "fail") return null;

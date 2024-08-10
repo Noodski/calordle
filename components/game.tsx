@@ -7,10 +7,9 @@ import Share from "./share";
 
 export default async function Game() {
   const {
-    data: { correctGuess, currentDate },
+    data: { currentDate },
   }: {
     data: {
-      correctGuess: number;
       currentDate: string;
     };
   } = await getData("game-data");
@@ -20,7 +19,7 @@ export default async function Game() {
       <ProductInfo />
       <GuessCount />
       <Guesses />
-      <Guess correctGuess={correctGuess} />
+      <Guess />
       <Share currentDate={currentDate} />
     </div>
   );
