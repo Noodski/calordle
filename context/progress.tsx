@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 
+// @TODO: Should we be more specific on the typing? What is the default?
 type Progress = string;
 
 interface Action {

@@ -1,6 +1,11 @@
 "use client";
 
-import { type Status, useGuesses, useGuessesDispatch } from "@/context/guesses";
+import {
+  type Direction,
+  Status,
+  useGuesses,
+  useGuessesDispatch,
+} from "@/context/guesses";
 
 export default function Guesses() {
   const guesses = useGuesses();
@@ -10,9 +15,9 @@ export default function Guesses() {
 
   const getBgColor = (status: Status): string => {
     switch (status) {
-      case "higher":
+      case "close":
         return "bg-orange";
-      case "lower":
+      case "far":
         return "bg-red";
       case "correct":
         return "bg-green";
@@ -21,17 +26,17 @@ export default function Guesses() {
 
   const getTextColor = (status: Status): string => {
     switch (status) {
-      case "higher":
+      case "close":
         return "text-orange";
-      case "lower":
+      case "far":
         return "text-red";
       case "correct":
         return "text-green";
     }
   };
 
-  const getIcon = (status: Status): string => {
-    switch (status) {
+  const getIcon = (direction: Direction): string => {
+    switch (direction) {
       case "higher":
         return "↑";
       case "lower":
@@ -52,7 +57,7 @@ export default function Guesses() {
           <div
             className={`flex h-6 w-6 items-center justify-center rounded-full bg-white text-center ${getTextColor(guess.status)}`}
           >
-            {getIcon(guess.status)}
+            {getIcon(guess.direction)}
           </div>
         </div>
       ))}

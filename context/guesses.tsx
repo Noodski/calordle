@@ -1,10 +1,13 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 
-export type Status = "higher" | "lower" | "correct";
+// @TODO: Should status actually be called distance?
+export type Status = "close" | "far" | "correct";
+export type Direction = "higher" | "lower" | "correct";
 
 interface GuessShared {
   value: number;
   status: Status;
+  direction: Direction;
 }
 
 interface Guess extends GuessShared {
@@ -54,6 +57,7 @@ function guessesReducer(guesses: Guess[], action: Action): Guess[] {
           index: guesses.length + 1,
           value: action.value,
           status: action.status,
+          direction: action.direction,
         },
       ];
     }
