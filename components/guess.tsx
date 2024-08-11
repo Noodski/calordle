@@ -21,6 +21,7 @@ export default function Guess() {
       guess: guessResult.data.guess,
       distance: guessResult.data.distance,
       direction: guessResult.data.direction,
+      answer: guessResult.data.answer,
     });
   }, [guessResult?.data, dispatchGuess]);
 

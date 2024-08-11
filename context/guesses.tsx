@@ -7,6 +7,7 @@ interface GuessShared {
   guess: number;
   distance: Distance;
   direction: Direction;
+  answer: number | null;
 }
 export interface Guess extends GuessShared {
   index: number;
@@ -25,6 +26,7 @@ function guessesReducer(guesses: Guess[], action: Action): Guess[] {
           guess: action.guess,
           distance: action.distance,
           direction: action.direction,
+          answer: action.answer,
         },
       ];
     }
