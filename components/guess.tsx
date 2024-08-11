@@ -1,44 +1,28 @@
 "use client";
 
-import { useProgress, useProgressDispatch } from "@/context/progress";
 import Button from "./button";
 import { submitGuess } from "@/lib/submit-guess";
 import { useFormState, useFormStatus } from "react-dom";
-import { useGuesses, useGuessesDispatch } from "@/context/guesses";
+import { useGuessesDispatch } from "@/context/guesses";
 import { useEffect } from "react";
+import useProgress from "@/hooks/use-progress";
 
 export default function Guess() {
   const [guessResult, submitGuessAction] = useFormState(submitGuess, null);
   const { pending } = useFormStatus();
-  const progress = useProgress();
-  const dispatchProgress = useProgressDispatch();
   const dispatchGuess = useGuessesDispatch();
-  const guesses = useGuesses();
+  const progress = useProgress();
 
   useEffect(() => {
     if (!guessResult?.data) return;
 
     dispatchGuess?.({
       type: "added",
-      value: guessResult.data.guess,
-      status: guessResult.data.result,
+      guess: guessResult.data.guess,
+      distance: guessResult.data.distance,
       direction: guessResult.data.direction,
     });
-
-    if (guessResult.data.result === "correct") {
-      dispatchProgress?.({
-        type: "changed",
-        value: "success",
-      });
-    } else if (guesses?.length === 5) {
-      dispatchProgress?.({
-        type: "changed",
-        value: "fail",
-      });
-    }
-    /* @TODO: Looks like eslint complains about missing dependencies, 
-      but this is how we need it to be to function correctly */
-  }, [guessResult?.data]);
+  }, [guessResult?.data, dispatchGuess]);
 
   if (progress === "success" || progress === "fail") return null;
 

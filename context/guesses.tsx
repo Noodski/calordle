@@ -1,51 +1,18 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 
-// @TODO: Should status actually be called distance?
-export type Status = "close" | "far" | "correct";
+export type Distance = "close" | "far" | "correct";
 export type Direction = "higher" | "lower" | "correct";
 
 interface GuessShared {
-  value: number;
-  status: Status;
+  guess: number;
+  distance: Distance;
   direction: Direction;
 }
-
-interface Guess extends GuessShared {
+export interface Guess extends GuessShared {
   index: number;
 }
-
 interface Action extends GuessShared {
   type: string;
-}
-
-const GuessesContext = createContext<Guess[] | null>(null);
-
-const GuessesDispatchContext = createContext<((action: Action) => void) | null>(
-  null,
-);
-
-interface GuessesProviderProps {
-  children: ReactNode;
-}
-
-export function GuessesProvider({ children }: GuessesProviderProps) {
-  const [guesses, dispatch] = useReducer(guessesReducer, initialGuesses);
-
-  return (
-    <GuessesContext.Provider value={guesses}>
-      <GuessesDispatchContext.Provider value={dispatch}>
-        {children}
-      </GuessesDispatchContext.Provider>
-    </GuessesContext.Provider>
-  );
-}
-
-export function useGuesses() {
-  return useContext(GuessesContext);
-}
-
-export function useGuessesDispatch() {
-  return useContext(GuessesDispatchContext);
 }
 
 function guessesReducer(guesses: Guess[], action: Action): Guess[] {
@@ -55,8 +22,8 @@ function guessesReducer(guesses: Guess[], action: Action): Guess[] {
         ...guesses,
         {
           index: guesses.length + 1,
-          value: action.value,
-          status: action.status,
+          guess: action.guess,
+          distance: action.distance,
           direction: action.direction,
         },
       ];
@@ -68,3 +35,27 @@ function guessesReducer(guesses: Guess[], action: Action): Guess[] {
 }
 
 const initialGuesses: Guess[] = [];
+
+const GuessesContext = createContext<Guess[]>(initialGuesses);
+const GuessesDispatchContext = createContext<((action: Action) => void) | null>(
+  null,
+);
+
+export function useGuesses() {
+  return useContext(GuessesContext);
+}
+export function useGuessesDispatch() {
+  return useContext(GuessesDispatchContext);
+}
+
+export function GuessesProvider({ children }: { children: ReactNode }) {
+  const [guesses, dispatch] = useReducer(guessesReducer, initialGuesses);
+
+  return (
+    <GuessesContext.Provider value={guesses}>
+      <GuessesDispatchContext.Provider value={dispatch}>
+        {children}
+      </GuessesDispatchContext.Provider>
+    </GuessesContext.Provider>
+  );
+}

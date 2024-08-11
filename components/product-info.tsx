@@ -1,9 +1,19 @@
 import getData from "@/lib/get-data";
 import Image from "next/image";
 
+export type Product = {
+  title: string;
+  img: string;
+  date: string;
+};
+
 export default async function ProductInfo() {
   const {
     data: { product },
+  }: {
+    data: {
+      product: Product;
+    };
   } = await getData("product");
 
   return (

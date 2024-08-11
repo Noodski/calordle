@@ -1,20 +1,21 @@
 "use client";
 
 import {
+  type Distance,
   type Direction,
-  Status,
+  type Guess,
   useGuesses,
-  useGuessesDispatch,
 } from "@/context/guesses";
+import useGuessCount from "@/hooks/use-guess-count";
 
 export default function Guesses() {
   const guesses = useGuesses();
-  const dispatch = useGuessesDispatch();
+  const guessCount = useGuessCount();
 
-  if (!guesses?.length) return null;
+  if (!guessCount) return null;
 
-  const getBgColor = (status: Status): string => {
-    switch (status) {
+  const getBgColor = (distance: Distance): string => {
+    switch (distance) {
       case "close":
         return "bg-orange";
       case "far":
@@ -24,8 +25,8 @@ export default function Guesses() {
     }
   };
 
-  const getTextColor = (status: Status): string => {
-    switch (status) {
+  const getTextColor = (distance: Distance): string => {
+    switch (distance) {
       case "close":
         return "text-orange";
       case "far":
@@ -48,14 +49,14 @@ export default function Guesses() {
 
   return (
     <div className="flex flex-col gap-y-2">
-      {guesses.map((guess) => (
+      {guesses.map((guess: Guess) => (
         <div
           key={guess.index}
-          className={`flex items-center justify-between gap-2 rounded-md px-4 py-2 text-center text-[18px] font-bold text-white ${getBgColor(guess.status)}`}
+          className={`flex items-center justify-between gap-2 rounded-md px-4 py-2 text-center text-[18px] font-bold text-white ${getBgColor(guess.distance)}`}
         >
-          <span>{guess.value}</span>
+          <span>{guess.guess}</span>
           <div
-            className={`flex h-6 w-6 items-center justify-center rounded-full bg-white text-center ${getTextColor(guess.status)}`}
+            className={`flex h-6 w-6 items-center justify-center rounded-full bg-white text-center ${getTextColor(guess.distance)}`}
           >
             {getIcon(guess.direction)}
           </div>

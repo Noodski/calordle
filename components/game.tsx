@@ -2,17 +2,19 @@ import getData from "@/lib/get-data";
 import Guess from "./guess";
 import GuessCount from "./guess-count";
 import Guesses from "./guesses";
-import ProductInfo from "./product-info";
+import ProductInfo, { Product } from "./product-info";
 import Share from "./share";
 
 export default async function Game() {
   const {
-    data: { currentDate },
+    data: {
+      product: { date: currentDate },
+    },
   }: {
     data: {
-      currentDate: string;
+      product: Product;
     };
-  } = await getData("game-data");
+  } = await getData("product");
 
   return (
     <div className="flex max-w-[300px] flex-col items-center justify-center gap-y-4">
