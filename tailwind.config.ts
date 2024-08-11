@@ -21,8 +21,20 @@ const config: Config = {
         red: "#ff4141",
         orange: "#ffa841",
       },
+      transitionDuration: {
+        DEFAULT: "250ms",
+      },
+      transitionTimingFunction: {
+        DEFAULT: "linear",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    // https://github.com/tailwindlabs/tailwindcss/discussions/12039#discussioncomment-10063510
+    /** @type {import('tailwindcss/types/config').PluginCreator} */
+    ({ addVariant }: any) => {
+      addVariant("starting", "@starting-style");
+    },
+  ],
 };
 export default config;

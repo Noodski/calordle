@@ -7,6 +7,7 @@ import {
   useGuesses,
 } from "@/context/guesses";
 import useGuessCount from "@/hooks/use-guess-count";
+import SlideDown from "./slide-down";
 
 export default function Guesses() {
   const guesses = useGuesses();
@@ -48,20 +49,25 @@ export default function Guesses() {
   };
 
   return (
-    <div className="flex flex-col gap-y-2">
-      {guesses.map((guess: Guess) => (
-        <div
-          key={guess.index}
-          className={`flex items-center justify-between gap-2 rounded-md px-4 py-2 text-center text-[18px] font-bold text-white ${getBgColor(guess.distance)}`}
-        >
-          <span>{guess.guess}</span>
-          <div
-            className={`flex h-6 w-6 items-center justify-center rounded-full bg-white text-center ${getTextColor(guess.distance)}`}
-          >
-            {getIcon(guess.direction)}
-          </div>
-        </div>
-      ))}
-    </div>
+    <SlideDown>
+      <div className="flex flex-col pt-2">
+        {guesses.map((guess: Guess) => (
+          <SlideDown key={guess.index}>
+            <div className="pb-2">
+              <div
+                className={`flex w-[108px] items-center justify-between gap-2 rounded-md px-4 py-2 text-center text-[18px] font-bold text-white ${getBgColor(guess.distance)}`}
+              >
+                <span>{guess.guess}</span>
+                <div
+                  className={`flex h-6 w-6 items-center justify-center rounded-full bg-white text-center ${getTextColor(guess.distance)}`}
+                >
+                  {getIcon(guess.direction)}
+                </div>
+              </div>
+            </div>
+          </SlideDown>
+        ))}
+      </div>
+    </SlideDown>
   );
 }

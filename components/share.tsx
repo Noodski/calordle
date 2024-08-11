@@ -4,6 +4,7 @@ import { useGuesses } from "@/context/guesses";
 import Button from "./button";
 import { useState } from "react";
 import useProgress from "@/hooks/use-progress";
+import SlideDown from "./slide-down";
 
 export default function Share({ currentDate }: { currentDate: string }) {
   const guesses = useGuesses();
@@ -54,13 +55,17 @@ export default function Share({ currentDate }: { currentDate: string }) {
 
   return (
     <>
-      <Button onClick={handleShare}>Share</Button>
+      <div className="absolute left-1/2 top-0 -translate-x-1/2 opacity-100 transition-opacity duration-500 starting:opacity-0">
+        <Button onClick={handleShare}>Share</Button>
+      </div>
       {txtCopied && (
-        <p
-          className={`text-center text-[18px] font-bold ${progress === "success" ? `text-green` : `text-red`}`}
-        >
-          Results copied!
-        </p>
+        <SlideDown>
+          <p
+            className={`pt-4 text-center text-[18px] font-bold ${progress === "success" ? `text-green` : `text-red`}`}
+          >
+            Results copied!
+          </p>
+        </SlideDown>
       )}
     </>
   );

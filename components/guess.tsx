@@ -25,18 +25,19 @@ export default function Guess() {
     });
   }, [guessResult?.data, dispatchGuess]);
 
-  if (progress === "success" || progress === "fail") return null;
-
   return (
     <form
-      className="flex w-full flex-col gap-4 sm:flex-row"
+      className={`flex w-full flex-row gap-4 transition-[opacity,visibility] duration-500 [transition-behavior:allow-discrete] ${(progress === "success" || progress === "fail") && "pointer-events-none invisible opacity-0"}`}
       action={submitGuessAction}
     >
       <input
         name="guess"
         type="number"
-        className="w-full rounded-md bg-gray px-4 py-2 text-[18px] font-bold"
-        placeholder="Calorie guess"
+        className="w-full rounded-md bg-gray px-4 py-2 text-[18px] font-bold outline-0 transition-shadow focus:ring-2 focus:ring-blue"
+        placeholder="Calories"
+        min="1"
+        max="9999"
+        required
       />
       <Button type="submit" disabled={pending}>
         {/* @TODO: I don't think I've actually seen it say "Checking Answer"? */}

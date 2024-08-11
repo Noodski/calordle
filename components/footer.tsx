@@ -6,11 +6,19 @@ export default function Footer() {
       <div>
         <p>
           Created by{" "}
-          <a href="https://github.com/Noodski" target="_blank">
+          <a
+            className="transition-colors hover:text-blue"
+            href="https://github.com/Noodski"
+            target="_blank"
+          >
             Cory Horne
           </a>{" "}
           &{" "}
-          <a href="https://blakejones.dev" target="_blank">
+          <a
+            className="transition-colors hover:text-blue"
+            href="https://blakejones.dev"
+            target="_blank"
+          >
             Blake Jones
           </a>
           .
@@ -21,7 +29,11 @@ export default function Footer() {
         </p>
       </div>
       <div>
-        <a href="https://github.com/blakej115/calordle" target="_blank">
+        <a
+          className="block transition-opacity hover:opacity-50"
+          href="https://github.com/blakej115/calordle"
+          target="_blank"
+        >
           <Github />
         </a>
       </div>
