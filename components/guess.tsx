@@ -1,15 +1,14 @@
 "use client";
 
-import Button from "./button";
 import { submitGuess } from "@/lib/submit-guess";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { useGuessesDispatch } from "@/context/guesses";
 import { useEffect } from "react";
 import useProgress from "@/hooks/use-progress";
+import SubmitButton from "./submit-button";
 
 export default function Guess() {
   const [guessResult, submitGuessAction] = useFormState(submitGuess, null);
-  const { pending } = useFormStatus();
   const dispatchGuess = useGuessesDispatch();
   const progress = useProgress();
 
@@ -39,10 +38,7 @@ export default function Guess() {
         max="9999"
         required
       />
-      <Button type="submit" disabled={pending}>
-        {/* @TODO: I don't think I've actually seen it say "Checking Answer"? */}
-        {pending ? "Checking Answer" : "Submit"}
-      </Button>
+      <SubmitButton />
     </form>
   );
 }

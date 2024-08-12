@@ -7,7 +7,10 @@ export async function submitGuess(prevState: any, formData: FormData) {
     body: formData,
   });
 
-  // @TODO: Error handling
+  // @TODO: Better error handling
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
   return res.json();
 }
